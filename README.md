@@ -1,6 +1,6 @@
 # MarchMadness_MachineLearning
 
-March 2018 Kaggle competition. This repository represents various efforts at applying various scikit-learn packages to historical NCAA Men's Tourney data. My end bracket is posted as 
+March 2018 Kaggle competition. This repository represents various efforts at applying various scikit-learn packages to historical NCAA Men's Tourney data. My end bracket is posted as: 2018 bracket logreg.pdf
 
 Requirements
 ---
