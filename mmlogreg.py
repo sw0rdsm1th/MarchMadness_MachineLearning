@@ -1,10 +1,4 @@
-"""
-This tool uses the data provided by the Kaggle Machine Learning Mania challenge
-and generates predictions for March Madness brackets.
 
-Link to competition:
-https://www.kaggle.com/c/march-machine-learning-mania-2017
-"""
 import pandas as pd
 import math
 from sklearn import model_selection, linear_model
@@ -26,10 +20,7 @@ def calc_elo(win_team, lose_team, season):
     winner_rank = get_elo(season, win_team)
     loser_rank = get_elo(season, lose_team)
 
-    """
-    This is originally from from:
-    http://zurb.com/forrst/posts/An_Elo_Rating_function_in_Python_written_for_foo-hQl
-    """
+  
     rank_diff = winner_rank - loser_rank
     exp = (rank_diff * -1) / 400
     odds = 1 / (1 + math.pow(10, exp))
@@ -83,17 +74,7 @@ def predict_winner(team_1, team_2, model, season, stat_fields):
 
 
 def update_stats(season, team, fields):
-    """
-    This accepts some stats for a team and udpates the averages.
-
-    First, we check if the team is in the dict yet. If it's not, we add it.
-    Then, we try to check if the key has more than 5 values in it.
-        If it does, we remove the first one
-        Either way, we append the new one.
-    If we can't check, then it doesn't exist, so we just add this.
-
-    Later, we'll get the average of these items.
-    """
+    
     if team not in team_stats[season]:
         team_stats[season][team] = {}
 
@@ -124,10 +105,7 @@ def build_team_dict():
 
 
 def build_season_data(all_data):
-    # Calculate the elo for every game for every team, each season.
-    # Store the elo per season so we can retrieve their end elo
-    # later in order to predict the tournaments without having to
-    # inject the prediction into this loop.
+    
     print("Building season data.")
     for index, row in all_data.iterrows():
         # Used to skip matchups where we don't have usable stats yet.
@@ -167,9 +145,7 @@ def build_season_data(all_data):
                 X.append(team_2_features + team_1_features)
                 y.append(1)
 
-        # AFTER we add the current stuff to the prediction, update for
-        # next time. Order here is key so we don't fit on data from the
-        # same game we're trying to predict.
+       
         if row['Wfta'] != 0 and row['Lfta'] != 0:
             stat_1_fields = {
                 'score': row['Wscore'],
