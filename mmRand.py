@@ -1,11 +1,4 @@
 
-"""
-This tool uses the data provided by the Kaggle Machine Learning Mania challenge
-and generates predictions for March Madness brackets.
-
-Link to competition:
-https://www.kaggle.com/c/march-machine-learning-mania-2017
-"""
 import pandas as pd
 import math
 from sklearn import model_selection, linear_model
@@ -86,17 +79,7 @@ def predict_winner(team_1, team_2, model, season, stat_fields):
 
 
 def update_stats(season, team, fields):
-    """
-    This accepts some stats for a team and udpates the averages.
-
-    First, we check if the team is in the dict yet. If it's not, we add it.
-    Then, we try to check if the key has more than 5 values in it.
-        If it does, we remove the first one
-        Either way, we append the new one.
-    If we can't check, then it doesn't exist, so we just add this.
-
-    Later, we'll get the average of these items.
-    """
+  
     if team not in team_stats[season]:
         team_stats[season][team] = {}
 
