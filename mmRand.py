@@ -145,9 +145,7 @@ def build_season_data(all_data):
                 X.append(team_2_features + team_1_features)
                 y.append(1)
 
-        # AFTER we add the current stuff to the prediction, update for
-        # next time. Order here is key so we don't fit on data from the
-        # same game we're trying to predict.
+    
         if row['Wfta'] != 0 and row['Lfta'] != 0:
             stat_1_fields = {
                 'score': row['Wscore'],
