@@ -1,5 +1,4 @@
 # MarchMadness_MachineLearning
-===
 
 March 2018 Kaggle competition. This repository represents various efforts at applying various scikit-learn packages to historical NCAA Men's Tourney data
 
