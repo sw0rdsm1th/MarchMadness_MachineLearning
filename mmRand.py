@@ -2,7 +2,6 @@
 import pandas as pd
 import math
 from sklearn import model_selection, linear_model
-#from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 import csv
 import random
@@ -22,10 +21,6 @@ def calc_elo(win_team, lose_team, season):
     winner_rank = get_elo(season, win_team)
     loser_rank = get_elo(season, lose_team)
 
-    """
-    This is originally from from:
-    http://zurb.com/forrst/posts/An_Elo_Rating_function_in_Python_written_for_foo-hQl
-    """
     rank_diff = winner_rank - loser_rank
     exp = (rank_diff * -1) / 400
     odds = 1 / (1 + math.pow(10, exp))
@@ -110,10 +105,7 @@ def build_team_dict():
 
 
 def build_season_data(all_data):
-    # Calculate the elo for every game for every team, each season.
-    # Store the elo per season so we can retrieve their end elo
-    # later in order to predict the tournaments without having to
-    # inject the prediction into this loop.
+  
     print("Building season data.")
     for index, row in all_data.iterrows():
         # Used to skip matchups where we don't have usable stats yet.
