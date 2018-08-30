@@ -1,10 +1,3 @@
-"""
-This tool uses the data provided by the Kaggle Machine Learning Mania challenge
-and generates predictions for March Madness brackets.
-
-Link to competition:
-https://www.kaggle.com/c/march-machine-learning-mania-2017
-"""
 import pandas as pd
 import math
 from sklearn import model_selection, linear_model
@@ -85,17 +78,15 @@ def predict_winner(team_1, team_2, model, season, stat_fields):
 
 
 def update_stats(season, team, fields):
-    """
-    This accepts some stats for a team and udpates the averages.
-
-    First, we check if the team is in the dict yet. If it's not, we add it.
-    Then, we try to check if the key has more than 5 values in it.
-        If it does, we remove the first one
-        Either way, we append the new one.
-    If we can't check, then it doesn't exist, so we just add this.
-
-    Later, we'll get the average of these items.
-    """
+    
+    #This accepts some stats for a team and udpates the averages.
+    #First, we check if the team is in the dict yet. If it's not, we add it.
+    #Then, we try to check if the key has more than 5 values in it.
+        #If it does, we remove the first one
+        #Either way, we append the new one.
+    #If we can't check, then it doesn't exist, so we just add this.
+    #Later, we'll get the average of these items.
+    
     if team not in team_stats[season]:
         team_stats[season][team] = {}
 
@@ -126,16 +117,16 @@ def build_team_dict():
 
 
 def build_season_data(all_data):
-    # Calculate the elo for every game for every team, each season.
-    # Store the elo per season so we can retrieve their end elo
-    # later in order to predict the tournaments without having to
-    # inject the prediction into this loop.
+# Calculate the elo for every game for every team, each season.
+# Store the elo per season so we can retrieve their end elo
+# later in order to predict the tournaments without having to
+# inject the prediction into this loop.
     print("Building season data.")
     for index, row in all_data.iterrows():
-        # Used to skip matchups where we don't have usable stats yet.
+# Used to skip matchups where we don't have usable stats yet.
         skip = 0
 
-        # Get starter or previous elos.
+# Get starter or previous elos.
         team_1_elo = get_elo(row['Season'], row['Wteam'])
         team_2_elo = get_elo(row['Season'], row['Lteam'])
 
@@ -220,8 +211,8 @@ if __name__ == "__main__":
                    'ast', 'to', 'stl', 'blk', 'pf']
 
     initialize_data()
-    season_data = pd.read_csv('/Users/agordon/Desktop/MM5/data-v3/RegularSeasonDetailedResults.csv')
-    tourney_data = pd.read_csv('/Users/agordon/Desktop/MM5/data-v2/TourneyDetailedResults.csv')
+    season_data = pd.read_csv('/Users/agordon/Desktop/MM12018/data-v3/RegularSeasonDetailedResults.csv')
+    tourney_data = pd.read_csv('/Users/agordon/Desktop/MM12018/data-v2/TourneyDetailedResults.csv')
     frames = [season_data, tourney_data]
     all_data = pd.concat(frames)
 
@@ -245,7 +236,7 @@ if __name__ == "__main__":
     
     # Now predict tournament matchups.
     print("Getting teams.")
-    seeds = pd.read_csv('/Users/agordon/Desktop/MM5/data-v3/TourneySeeds.csv')
+    seeds = pd.read_csv('/Users/agordon/Desktop/MM12018/data-v3/TourneySeeds.csv')
     # for i in range(2016, 2017):
     tourney_teams = []
     for index, row in seeds.iterrows():
@@ -296,9 +287,9 @@ if __name__ == "__main__":
                 (team_id_map[winning], team_id_map[losing], proba)
             ]
         )
-    with open('/Users/agordon/Desktop/MM5/data-v2/readable-predictions.csv', 'w') as f:
+    with open('/Users/agordon/Desktop/MM12018/data-v2/readable-predictions.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerows(readable)
-    with open('/Users/agordon/Desktop/MM5/data-v2/less-readable-predictions.csv', 'w') as f:
+    with open('/Users/agordon/Desktop/MM12018/data-v2/less-readable-predictions.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerows(less_readable)
